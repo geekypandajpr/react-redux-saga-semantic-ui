@@ -4,21 +4,21 @@ import { connect } from 'react-redux';
 import { Form, Input } from 'formsy-semantic-ui-react';
 import { Button, Grid, Header, Image, Message, Segment, Responsive, TransitionablePortal, Label } from 'semantic-ui-react';
 import { required, email } from '../../utils/validation';
-import { userActions } from '../../actions/index';
+import { loginRequest,forgotRequest } from '../../actions/index';
 
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       canSubmit: false,
       open: true,
     };
-    this.submit = this.submit.bind(this);
-    this.enableButton = this.enableButton.bind(this);
-    this.disableButton = this.disableButton.bind(this);
-    this.toggleUI = this.toggleUI.bind(this);
-    this.forgot= this.forgot.bind(this);
+    this.submit         = this.submit.bind(this);
+    this.enableButton   = this.enableButton.bind(this);
+    this.disableButton  = this.disableButton.bind(this);
+    this.toggleUI       = this.toggleUI.bind(this);
+    this.forgot         = this.forgot.bind(this);
   }
 
   toggleUI(e) {
@@ -28,11 +28,9 @@ class LoginPage extends Component {
   }
 
   submit(data) {
-    if(!data.email==''&&!data.password==''){
-      const { dispatch } = this.props;
-      // sessionStorage.setItem('user','1234');
-      dispatch(userActions.loginRequest(data));}
-    else{
+    if(!data.email === '' && !data.password === ''){
+      this.props.dispatch(loginRequest(data));
+    } else {
       alert('Email and password requer');
     }
 
@@ -40,8 +38,7 @@ class LoginPage extends Component {
   }
 
   forgot(data){
-    const { dispatch } = this.props;
-    dispatch(userActions.forgotRequest(data));
+    this.props.dispatch(forgotRequest(data));
   }
 
 
@@ -107,16 +104,11 @@ class LoginPage extends Component {
 }
 
 function mapStateToProps(state) {
-  alert("response"+JSON.stringify(state));
-
-  // alert('login component'+JSON.stringify(state));
-  return {
-  
-  }
+  return {}
 }
 
 // export default LoginPage;
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(Login);
 
 const LogInStyleWrapper = styled.div`
 {

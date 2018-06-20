@@ -6,9 +6,6 @@ import logger from 'redux-logger';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas/index';
 
-
-
-
 export default function configureStore(history) {
     //Configure Logger 
     const sagaMiddleware = createSagaMiddleware();
